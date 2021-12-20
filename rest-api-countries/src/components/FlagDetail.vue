@@ -14,7 +14,7 @@
         v-for="country in countryDetail"
         :key="country.name.common"
       >
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-12">
           <div class="detail-wrap__left">
             <div class="detail-wrap__img-wrap">
               <img
@@ -26,43 +26,59 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-12">
           <div class="detail-wrap__right">
             <div class="flag-detail">
               <h2 class="flag-detail__name">{{ country.name.common }}</h2>
               <div class="flag-detail__info">
                 <ul class="row">
-                  <li class="col-md-6 flag-detail__info-item">
+                  <li class="col-md-6 col-sm-12 flag-detail__info-item">
                     <strong>Native Name: </strong>
-                    <span>{{ country.name.nativeName }}</span>
+                    <span
+                      v-for="nativeName in country.name.nativeName"
+                      :key="nativeName.official"
+                      >{{ nativeName.common + " " }}</span
+                    >
                   </li>
-                  <li class="col-md-6 flag-detail__info-item">
+                  <li class="col-md-6 col-sm-12 flag-detail__info-item">
                     <strong>Top Level Domain: </strong>
-                    <span>{{ country.tld }}</span>
+                    <span v-for="tld in country.tld" :key="tld">{{
+                      tld + " "
+                    }}</span>
                   </li>
-                  <li class="col-md-6 flag-detail__info-item">
+                  <li class="col-md-6 col-sm-12 flag-detail__info-item">
                     <strong>Population: </strong>
                     <span>{{ country.population }}</span>
                   </li>
-                  <li class="col-md-6 flag-detail__info-item">
+                  <li class="col-md-6 col-sm-12 flag-detail__info-item">
                     <strong>Currencies: </strong>
-                    <span>{{ country.currencies }}</span>
+                    <span
+                      v-for="currencies in country.currencies"
+                      :key="currencies.name"
+                      >{{ currencies.name }}</span
+                    >
                   </li>
-                  <li class="col-md-6 flag-detail__info-item">
+                  <li class="col-md-6 col-sm-12 flag-detail__info-item">
                     <strong>Region: </strong>
                     <span>{{ country.region }}</span>
                   </li>
-                  <li class="col-md-6 flag-detail__info-item">
+                  <li class="col-md-6 col-sm-12 flag-detail__info-item">
                     <strong>Languages: </strong>
-                    <span>{{ country.languages }}</span>
+                    <span
+                      v-for="languages in country.languages"
+                      :key="languages"
+                      >{{ languages + " " }}</span
+                    >
                   </li>
-                  <li class="col-md-6 flag-detail__info-item">
+                  <li class="col-md-6 col-sm-12 flag-detail__info-item">
                     <strong>Sub Region: </strong>
                     <span>{{ country.subregion }}</span>
                   </li>
-                  <li class="col-md-6 flag-detail__info-item">
+                  <li class="col-md-6 col-sm-12 flag-detail__info-item">
                     <strong>Capital: </strong>
-                    <span>{{ country.capital }}</span>
+                    <span v-for="capital in country.capital" :key="capital">{{
+                      capital + " "
+                    }}</span>
                   </li>
                 </ul>
               </div>
@@ -77,6 +93,7 @@
 
 <script>
 import Loader from "./Loader.vue";
+import router from "../router";
 import CountriesDataService from "../services/CountriesDataService";
 export default {
   name: "FlagDetail",
@@ -99,6 +116,11 @@ export default {
         })
         .catch((e) => {
           console.log(e);
+          if (e.response.status == 404) {
+            router.push({
+              name: "pagenotfound",
+            });
+          }
         })
         .finally(() => (this.isLoading = false));
     },

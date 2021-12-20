@@ -30,18 +30,17 @@
         <input
           type="text"
           name="search"
+          v-model="searchText"
+          @keyup.enter="onEnter(searchText)"
           class="input-element"
           placeholder="Search for a country..."
         />
       </div>
       <div class="top-bar__filter">
         <div class="filter-select" @click="openRegionDropdown">
-          {{ selectedRegion == "" ? "Filter by Region" : selectedRegion }}
+          {{ selectedRegionOption }}
         </div>
         <ul class="filter-dropdown" :class="{ open: isDropdownOpen }">
-          {{
-            regions["key"]
-          }}
           <li
             class="filter-dropdown__item"
             v-for="region in regions"
@@ -54,7 +53,7 @@
       </div>
     </div>
 
-    <div class="flags">
+    <div class="flags" v-if="!isLoading">
       <div class="row">
         <div
           class="col-md-3"
@@ -83,7 +82,15 @@ export default {
       countries: [],
       regions: [],
       selectedRegion: "",
+      searchText: "",
     };
+  },
+  computed: {
+    selectedRegionOption: function () {
+      return this.selectedRegion == ""
+        ? "Filter by Region"
+        : this.selectedRegion;
+    },
   },
   components: {
     FlagItem,
@@ -113,12 +120,37 @@ export default {
     openRegionDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen;
     },
+    onEnter(searchText) {
+      if (searchText.trim() != "") {
+        this.isLoading = true;
+        CountriesDataService.getCountry(searchText)
+          .then((res) => {
+            this.countries = res.data;
+          })
+          .catch((e) => {
+            console.log(e);
+          })
+          .finally(() => {
+            this.isLoading = false;
+          });
+      }
+    },
     filterByRegion(region) {
-      this.selectedRegion = region;
       this.isDropdownOpen = false;
-      this.countries = this.countries.filter(
-        (country) => country.region == region
-      );
+      if (this.selectedRegion != region) {
+        this.isLoading = true;
+        this.selectedRegion = region;
+        CountriesDataService.getCountriesByRegion(region)
+          .then((res) => {
+            this.countries = res.data;
+          })
+          .catch((e) => {
+            console.log(e);
+          })
+          .finally(() => {
+            this.isLoading = false;
+          });
+      }
     },
   },
   mounted() {

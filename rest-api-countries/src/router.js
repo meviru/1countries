@@ -20,6 +20,6 @@ export default new Router({
       name: "details",
       component: FlagDetail,
     },
-    { path: "/:pathMatch(.*)*", component: PageNotFound },
+    { path: "/:pathMatch(.*)*", name: "pagenotfound", component: PageNotFound },
   ],
 });

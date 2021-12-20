@@ -7,6 +7,9 @@ class CountriesDataService {
   getCountry(name) {
     return http.get(`/name/${name}`);
   }
+  getCountriesByRegion(region) {
+    return http.get(`/region/${region}`);
+  }
 }
 
 export default new CountriesDataService();
