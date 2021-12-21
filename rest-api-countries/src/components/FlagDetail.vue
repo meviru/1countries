@@ -11,8 +11,8 @@
       </div>
       <div
         class="row align-items-center"
-        v-for="country in countryDetail"
-        :key="country.name.common"
+        v-for="(country, index) in countryDetail"
+        :key="index"
       >
         <div class="col-md-6 col-sm-12">
           <div class="detail-wrap__left">
@@ -35,14 +35,14 @@
                   <li class="col-md-6 col-sm-12 flag-detail__info-item">
                     <strong>Native Name: </strong>
                     <span
-                      v-for="nativeName in country.name.nativeName"
-                      :key="nativeName.official"
+                      v-for="(nativeName, index) in country.name.nativeName"
+                      :key="index"
                       >{{ nativeName.common + " " }}</span
                     >
                   </li>
                   <li class="col-md-6 col-sm-12 flag-detail__info-item">
                     <strong>Top Level Domain: </strong>
-                    <span v-for="tld in country.tld" :key="tld">{{
+                    <span v-for="(tld, index) in country.tld" :key="index">{{
                       tld + " "
                     }}</span>
                   </li>
@@ -65,8 +65,8 @@
                   <li class="col-md-6 col-sm-12 flag-detail__info-item">
                     <strong>Languages: </strong>
                     <span
-                      v-for="languages in country.languages"
-                      :key="languages"
+                      v-for="(languages, index) in country.languages"
+                      :key="index"
                       >{{ languages + " " }}</span
                     >
                   </li>
@@ -76,7 +76,7 @@
                   </li>
                   <li class="col-md-6 col-sm-12 flag-detail__info-item">
                     <strong>Capital: </strong>
-                    <span v-for="capital in country.capital" :key="capital">{{
+                    <span v-for="(capital, index) in country.capital" :key="index">{{
                       capital + " "
                     }}</span>
                   </li>

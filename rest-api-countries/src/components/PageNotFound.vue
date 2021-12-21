@@ -3,7 +3,7 @@
     <h2 class="page-not-found__title">Page Not Found</h2>
     <lottie-animation class="page-not-found__anim"
       ref="anim"
-      :animationData="require('@/assets/images/lf20_c8szgzpw.json')"
+      :animationData="require('@/assets/images/404-animation.json')"
       :loop="false"
       :speed="1.5"
     />

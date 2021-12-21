@@ -43,8 +43,8 @@
         <ul class="filter-dropdown" :class="{ open: isDropdownOpen }">
           <li
             class="filter-dropdown__item"
-            v-for="region in regions"
-            :key="region"
+            v-for="(region, index) in regions"
+            :key="index"
             @click="filterByRegion(region)"
           >
             {{ region }}
@@ -57,8 +57,8 @@
       <div class="row">
         <div
           class="col-md-3"
-          v-for="country in countries"
-          :key="country.name.common"
+          v-for="(country, index) in countries"
+          :key="index"
         >
           <flag-item :country-item="country"></flag-item>
         </div>
