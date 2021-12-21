@@ -444,6 +444,7 @@ body.dark-theme .top-bar__search-icon {
 
 .flag-detail__border strong {
   flex-shrink: 0;
+  margin-right: 10px;
 }
 
 .flag-detail__border-item {
