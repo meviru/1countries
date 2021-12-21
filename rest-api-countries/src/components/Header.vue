@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <div class="header">
     <div class="container">
       <div
         class="header__wrapper d-flex align-items-center justify-space-between"
@@ -55,7 +55,7 @@
         </a>
       </div>
     </div>
-  </header>
+  </div>
 </template>
 
 <script>
