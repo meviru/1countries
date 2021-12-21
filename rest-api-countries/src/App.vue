@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" role="main">
     <header-component :appTitle="appTitle"></header-component>
     <div class="page-wrapper">
       <div class="container">
