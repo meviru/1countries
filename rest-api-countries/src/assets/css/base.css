@@ -377,7 +377,7 @@ body.dark-theme .top-bar__search-icon {
 }
 
 .flag-item__info {
-  padding: 20px 25px 40px;
+  padding: 22px 25px 40px;
 }
 
 .flag-item__name {
@@ -452,6 +452,7 @@ body.dark-theme .top-bar__search-icon {
   flex: 0 0 95px;
   min-width: 95px;
   cursor: pointer;
+  padding: 0 10px;
   margin: 5px 0 5px 10px;
   display: inline-flex;
   align-items: center;
@@ -591,7 +592,7 @@ body.dark-theme .top-bar__search-icon {
 
 /* Responsive */
 
-@media (max-width: 1399px) {
+@media (max-width: 1349px) {
   .flags .row {
     margin-left: -15px;
     margin-right: -15px;
