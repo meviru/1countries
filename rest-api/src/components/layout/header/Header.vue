@@ -12,7 +12,6 @@
     >
       <el-menu-item index="1" route="/">Home</el-menu-item>
       <el-menu-item index="2" route="/person/create">Add Person</el-menu-item>
-      <el-menu-item index="3" route="/person/edit/1">Edit Person</el-menu-item>
     </el-menu>
   </el-header>
 </template>
