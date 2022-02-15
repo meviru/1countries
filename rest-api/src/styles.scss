@@ -2,7 +2,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap");
 // Bootstrap utilities classes only
 @import "~bootstrap-utilities";
+// Vue Toastification Styles
+@import "~vue-toastification/src/scss/index.scss";
 // Custom base styles
 @import "assets/scss/base/index";
 // Custom component styles
 @import "assets/scss/component/index";
+
+// Customize Toastification Component
+.Vue-Toastification {
+  &__toast {
+    font-family: $font-base;
+    &-body {
+      font-size: $font-base-size-md;
+    }
+  }
+}

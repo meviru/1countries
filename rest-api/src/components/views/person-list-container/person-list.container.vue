@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { useToast } from "vue-toastification";
 import PersonListPresentation from "./person-list-presentation/person-list.presentation.vue";
 import PersonListService from "../../services/person-list.service";
 
@@ -13,6 +14,10 @@ export default {
   name: "PersonListContainer",
   components: {
     PersonListPresentation,
+  },
+  setup() {
+    const toast = useToast();
+    return { toast };
   },
   data() {
     return {
@@ -26,8 +31,9 @@ export default {
         if (personsListResponse.data) {
           this.personsList = personsListResponse.data;
         }
-      } catch (error) {
-        console.log(error);
+      } catch (e) {
+        this.toast.error("Oops! We ran into some problem.")
+        console.log(e);
       }
     },
   },
