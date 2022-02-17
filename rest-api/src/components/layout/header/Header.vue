@@ -4,12 +4,10 @@
       :default-active="activeIndex"
       class="el-menu-demo"
       mode="horizontal"
-      background-color="#545c64"
+      background-color="#444"
       text-color="#fff"
       router="true"
-      active-text-color="#ffd04b"
-      @select="handleSelect"
-    >
+      active-text-color="#fff">
       <el-menu-item index="1" route="/">Home</el-menu-item>
       <el-menu-item index="2" route="/person/create">Add Person</el-menu-item>
     </el-menu>

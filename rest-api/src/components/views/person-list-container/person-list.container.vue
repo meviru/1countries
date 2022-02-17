@@ -26,14 +26,19 @@ export default {
   },
   methods: {
     async getPersonsList() {
-      try {
-        const personsListResponse = await PersonListService.getAllPersons();
-        if (personsListResponse.data) {
-          this.personsList = personsListResponse.data;
+      let triesCounter = 1;
+      while (triesCounter <= 3) {
+        try {
+          const personsListResponse = await PersonListService.getAllPersons();
+          if (personsListResponse.data) {
+            this.personsList = personsListResponse.data;
+            break;
+          }
+        } catch (e) {
+          this.toast.error("Oops! We ran into some problem.");
+          console.log(e);
         }
-      } catch (e) {
-        this.toast.error("Oops! We ran into some problem.")
-        console.log(e);
+        triesCounter++;
       }
     },
   },

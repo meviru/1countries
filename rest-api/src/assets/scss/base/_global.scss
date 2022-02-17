@@ -6,7 +6,8 @@
 
 body {
   font-family: $font-base;
-  font-size: $font-base-size;
+  font-size: $font-base-size * 0.875;
+  background-color: $body-bg;
 }
 
 a {
@@ -16,4 +17,15 @@ a {
 img {
   border: none;
   max-width: 100%;
+}
+
+.el-main {
+  --el-main-padding: 1.5rem;
+}
+
+input,
+button,
+textarea,
+select {
+  font-family: $font-base;
 }

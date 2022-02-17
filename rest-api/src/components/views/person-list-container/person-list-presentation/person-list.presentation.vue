@@ -1,47 +1,129 @@
 <template>
-  <el-table :data="personLists" v-if="personLists.length">
-    <el-table-column prop="name" label="Name" width="300">
-      <template v-slot="scope">
-        <div class="d-flex align-items-center">
-          <el-avatar :size="40" :src="scope.row.picture"></el-avatar>
-          <div class="ml-2">
-            <p class="mb-0">{{ scope.row.name }}</p>
-            <el-link :underline="false" :href="`mailto:${scope.row.email}`">
-              <el-tag size="small">{{ scope.row.email }}</el-tag>
-            </el-link>
+  <el-skeleton :loading="isLoading" animated>
+    <template #template>
+      <el-row :gutter="24">
+        <el-col
+          v-for="o in 6"
+          :key="o"
+          :xl="4"
+          :lg="6"
+          :md="8"
+          :sm="12"
+          class="mb-2"
+        >
+          <div class="d-flex align-items-center">
+            <el-skeleton-item
+              variant="image"
+              style="
+                width: 42px;
+                flex: 0 0 42px;
+                height: 42px;
+                border-radius: 50%;
+              "
+            />
+            <div class="flex-grow-1">
+              <el-skeleton-item
+                variant="text"
+                class="ml-2"
+                style="width: 30%"
+              />
+              <br />
+              <el-skeleton-item
+                variant="text"
+                class="ml-2 mt-2"
+                style="width: 70%"
+              />
+            </div>
           </div>
-        </div>
-      </template>
-    </el-table-column>
-    <el-table-column prop="address" label="Address" />
-    <el-table-column prop="phone" label="Phone" />
-    <el-table-column label="Action">
-      <template v-slot="scope">
-        <el-link :underline="false" :href="`person/edit/${scope.row._id}`">
-          <el-icon :size="20">
-            <svg
-              t="1639990532110"
-              class="icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="12171"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              width="200"
-              height="200"
-              data-v-042ca774=""
+          <div style="padding: 14px">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-items: space-between;
+                margin-top: 16px;
+                height: 16px;
+              "
             >
-              <path
-                d="M199.04 672.64l193.984 112 224-387.968-193.92-112-224 388.032z m-23.872 60.16l32.896 148.288 144.896-45.696-177.792-102.592zM455.04 229.248l193.92 112 56.704-98.112-193.984-112-56.64 98.112zM104.32 708.8l384-665.024 304.768 175.936-383.936 665.088h0.064l-248.448 78.336-56.448-254.336z m384 254.272v-64h448v64h-448z"
-                p-id="12172"
-              ></path>
-            </svg>
-          </el-icon>
-        </el-link>
-      </template>
-    </el-table-column>
-  </el-table>
-  <el-skeleton v-else :rows="5" animated />
+              <el-skeleton-item variant="text" style="margin-right: 16px" />
+              <el-skeleton-item variant="text" style="width: 30%" />
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-items: space-between;
+                margin-top: 16px;
+                height: 16px;
+              "
+            >
+              <el-skeleton-item variant="text" style="width: 30%" />
+              <el-skeleton-item variant="text" style="margin-left: 16px" />
+            </div>
+            <el-skeleton-item
+              variant="square"
+              class="mt-3"
+              style="height: 50px"
+            />
+          </div>
+        </el-col>
+      </el-row>
+    </template>
+    <template #default>
+      <el-row :gutter="24">
+        <template v-if="personLists.length > 0">
+          <el-col
+            :xl="4"
+            :lg="6"
+            :md="8"
+            :sm="12"
+            v-for="person in personLists"
+            :key="person._id"
+          >
+            <el-card class="box-card mb-4">
+              <template #header>
+                <div class="card-header">
+                  <div class="d-flex align-items-center">
+                    <el-avatar
+                      :size="42"
+                      style="flex: 0 0 42px"
+                      :src="person.picture"
+                    ></el-avatar>
+                    <div class="d-flex flex-column ml-2">
+                      <span class="mb-1">{{ person.name }}</span>
+                      <el-tag size="small">
+                        <el-link
+                          type="primary"
+                          :underline="false"
+                          :href="`mailto:${person.email}`"
+                        >
+                          {{ person.email }}
+                        </el-link>
+                      </el-tag>
+                    </div>
+                  </div>
+                </div>
+              </template>
+              <div class="text item">
+                <div class="address mb-3">
+                  <p>{{ person.address }}</p>
+                </div>
+                <div class="d-flex align-items-center justify-content-between">
+                  <router-link
+                    :to="`/person/edit/${person._id}`"
+                    class="button"
+                  >
+                    <el-button type="primary">Edit</el-button>
+                  </router-link>
+                  <el-button class="ml-2" type="danger">Delete</el-button>
+                </div>
+              </div>
+            </el-card>
+          </el-col>
+        </template>
+      </el-row>
+    </template>
+  </el-skeleton>
 </template>
 
 <script>
@@ -52,12 +134,14 @@ export default {
   data() {
     return {
       personLists: [],
+      isLoading: true,
     };
   },
   watch: {
     persons(newValue) {
       if (newValue.length) {
         this.personLists = newValue;
+        this.isLoading = false;
       }
     },
   },
