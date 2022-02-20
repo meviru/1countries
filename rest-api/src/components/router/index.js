@@ -10,12 +10,12 @@ const routes = [
   {
     path: "/person/create",
     name: "PersonCreate",
-    component: () => import("../views/person/PersonCreate.vue"),
+    component: () =>
+      import("../views/person-form-container/person-form.container.vue"),
   },
   {
     path: "/person/edit/:id",
     name: "PersonEdit",
-    component: () => import("../views/person/PersonEdit.vue"),
   },
 ];
 
